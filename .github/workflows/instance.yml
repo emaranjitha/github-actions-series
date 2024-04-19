@@ -28,12 +28,10 @@ jobs:
           terraform_wrapper: false
       - name: Terraform Apply
         id:   apply
-        env:
-          TF_VAR_ec2_name:  "${{ github.event.inputs.ec2-name }}"
         run: |
           cd tf-example/
           terraform init
           terraform validate
           terraform plan 
-          terraform apply -auto-approve
+          terraform apply -var ec2_name=${{ github.event.inputs.ec2-name }} 
      
